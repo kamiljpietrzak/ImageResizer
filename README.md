@@ -2,6 +2,11 @@
 
 Ta aplikacja umożliwia zmianę rozmiaru wszystkich obrazów w podanym folderze na wymiary 300x450 pikseli, zachowując przy tym ich jakość. Obrazy są najpierw skalowane z zachowaniem proporcji, a następnie przycinane do docelowego rozmiaru, co zapewnia, że obrazy nie będą zniekształcone.
 
+## Repozytorium GitHub
+
+Kod źródłowy aplikacji jest dostępny na GitHub:
+[https://github.com/kamiljpietrzak/ImageResizer](https://github.com/kamiljpietrzak/ImageResizer)
+
 ## Wymagania
 
 - Python 3.6 lub nowszy
@@ -27,6 +32,7 @@ Aplikacja desktopowa pozwala na:
 - Wybór folderu z obrazami za pomocą przeglądarki folderów
 - Wybór folderu docelowego
 - Dostosowanie docelowych wymiarów obrazów
+- Dostosowanie jakości obrazów (0-100) i stopnia wyostrzania
 - Śledzenie postępu przetwarzania
 
 ### Wersja konsolowa
@@ -53,9 +59,21 @@ Gdzie:
 
 1. Każdy obraz jest najpierw skalowany z zachowaniem proporcji, tak aby jego szerokość lub wysokość (w zależności od proporcji) odpowiadała docelowym wymiarom
 2. Następnie obraz jest przycinany centralnie do dokładnych wymiarów 300x450 pikseli
-3. Obraz jest zapisywany z wysoką jakością (95%) i optymalizacją
+3. Zastosowane jest wyostrzanie obrazu, aby zrekompensować utratę ostrości podczas zmiany rozmiaru
+4. Obraz jest zapisywany z wysoką jakością (95%) i optymalizacją, z zachowaniem oryginalnego formatu
 
 Ta metoda zapewnia, że obrazy nie są zniekształcone (zwężone lub rozciągnięte), ale zachowują swoje naturalne proporcje, a jednocześnie mają dokładnie wymagany rozmiar.
+
+## Zaawansowane techniki poprawy jakości
+
+Aplikacja wykorzystuje szereg technik, aby zminimalizować utratę jakości podczas przetwarzania:
+
+1. **Nadpróbkowanie (Oversampling)** - Obrazy są najpierw skalowane do rozmiaru 1,5 razy większego niż docelowy, a następnie przycinane i zmniejszane do ostatecznego rozmiaru
+2. **Wyostrzanie obrazu** - Kompensuje naturalną utratę ostrości podczas zmiany rozmiaru
+3. **Optymalizacja dla różnych formatów**:
+   - Dla JPEG: Wyłączenie podpróbkowania chrominancji (subsampling=0), co eliminuje artefakty kompresji
+   - Dla PNG: Użycie najlepszej kompresji bezstratnej (compress_level=9)
+4. **Zachowanie oryginalnego formatu** - Aplikacja wykrywa i zachowuje oryginalny format obrazu
 
 ## Obsługiwane formaty obrazów
 
