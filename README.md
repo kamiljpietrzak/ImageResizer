@@ -74,6 +74,7 @@ Aplikacja wykorzystuje szereg technik, aby zminimalizować utratę jakości podc
    - Dla JPEG: Wyłączenie podpróbkowania chrominancji (subsampling=0), co eliminuje artefakty kompresji
    - Dla PNG: Użycie najlepszej kompresji bezstratnej (compress_level=9)
    - Dla WebP: Optymalizacja jakości i metody kompresji (method=6)
+   - Dla AVIF: Najwyższa jakość kompresji (speed=0) dla najlepszych rezultatów
 4. **Zachowanie oryginalnego formatu** - Aplikacja wykrywa i zachowuje oryginalny format obrazu
 
 ## Obsługiwane formaty obrazów
@@ -85,6 +86,7 @@ Aplikacja obsługuje następujące formaty obrazów:
 - GIF
 - TIFF
 - WebP
+- AVIF (wymaga instalacji dodatkowego pakietu pillow-avif-plugin)
 
 ## Przykłady
 

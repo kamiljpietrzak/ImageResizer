@@ -2,6 +2,13 @@ import os
 import sys
 from PIL import Image, ImageEnhance
 
+# Zaimportuj plugin AVIF
+try:
+    import pillow_avif
+except ImportError:
+    print("Plugin AVIF nie jest zainstalowany. Obrazy AVIF nie będą obsługiwane.")
+    print("Aby zainstalować plugin, użyj: pip install pillow-avif-plugin")
+
 def resize_images(input_folder, output_folder, target_width=300, target_height=450, quality=95, sharpen_factor=1.2):
     """
     Zmienia rozmiar wszystkich obrazów w podanym folderze na określone wymiary.
@@ -21,7 +28,7 @@ def resize_images(input_folder, output_folder, target_width=300, target_height=4
         print(f"Utworzono folder wyjściowy: {output_folder}")
     
     # Obsługiwane formaty obrazów
-    supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp')
+    supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp', '.avif')
     
     # Liczniki
     total_images = 0
@@ -94,6 +101,9 @@ def resize_images(input_folder, output_folder, target_width=300, target_height=4
                     elif original_format == 'WEBP' or filename.lower().endswith('.webp'):
                         # Dla WebP ustaw jakość i metodę kompresji
                         img_final.save(output_path, format='WEBP', quality=quality, method=6)
+                    elif original_format == 'AVIF' or filename.lower().endswith('.avif'):
+                        # Dla AVIF ustaw jakość i szybkość kompresji
+                        img_final.save(output_path, format='AVIF', quality=quality, speed=0)
                     else:
                         # Dla innych formatów użyj domyślnych ustawień
                         img_final.save(output_path, quality=quality, optimize=True)

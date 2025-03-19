@@ -6,6 +6,13 @@ from PIL import Image, ImageTk, ImageEnhance
 import threading
 import time
 
+# Zaimportuj plugin AVIF
+try:
+    import pillow_avif
+except ImportError:
+    print("Plugin AVIF nie jest zainstalowany. Obrazy AVIF nie będą obsługiwane.")
+    print("Aby zainstalować plugin, użyj: pip install pillow-avif-plugin")
+
 class ImageResizerApp:
     def __init__(self, root):
         self.root = root
@@ -123,7 +130,7 @@ class ImageResizerApp:
         info_text.insert(tk.END, "4. Kliknij 'Rozpocznij przetwarzanie'\n\n")
         info_text.insert(tk.END, "Obrazy są skalowane z zachowaniem proporcji, a następnie przycinane do docelowego rozmiaru.\n")
         info_text.insert(tk.END, "Wyższe wartości jakości i wyostrzania zapewniają lepsze rezultaty, ale zwiększają rozmiar plików.\n\n")
-        info_text.insert(tk.END, "Obsługiwane formaty obrazów: JPG/JPEG, PNG, BMP, GIF, TIFF, WebP")
+        info_text.insert(tk.END, "Obsługiwane formaty obrazów: JPG/JPEG, PNG, BMP, GIF, TIFF, WebP, AVIF")
         info_text.config(state=tk.DISABLED)
     
     def center_window(self):
@@ -199,7 +206,7 @@ class ImageResizerApp:
             os.makedirs(output_folder)
         
         # Obsługiwane formaty obrazów
-        supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp')
+        supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp', '.avif')
         
         # Znajdź wszystkie obrazy w folderze wejściowym
         image_files = []
@@ -285,6 +292,9 @@ class ImageResizerApp:
                     elif original_format == 'WEBP' or filename.lower().endswith('.webp'):
                         # Dla WebP ustaw jakość i metodę kompresji
                         img_final.save(output_path, format='WEBP', quality=quality, method=6)
+                    elif original_format == 'AVIF' or filename.lower().endswith('.avif'):
+                        # Dla AVIF ustaw jakość i szybkość kompresji
+                        img_final.save(output_path, format='AVIF', quality=quality, speed=0)
                     else:
                         # Dla innych formatów użyj domyślnych ustawień
                         img_final.save(output_path, quality=quality, optimize=True)
