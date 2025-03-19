@@ -21,7 +21,7 @@ def resize_images(input_folder, output_folder, target_width=300, target_height=4
         print(f"Utworzono folder wyjściowy: {output_folder}")
     
     # Obsługiwane formaty obrazów
-    supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff')
+    supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp')
     
     # Liczniki
     total_images = 0
@@ -91,6 +91,9 @@ def resize_images(input_folder, output_folder, target_width=300, target_height=4
                     elif original_format == 'PNG' or filename.lower().endswith('.png'):
                         # Dla PNG użyj najlepszej kompresji bezstratnej
                         img_final.save(output_path, format='PNG', optimize=True, compress_level=9)
+                    elif original_format == 'WEBP' or filename.lower().endswith('.webp'):
+                        # Dla WebP ustaw jakość i metodę kompresji
+                        img_final.save(output_path, format='WEBP', quality=quality, method=6)
                     else:
                         # Dla innych formatów użyj domyślnych ustawień
                         img_final.save(output_path, quality=quality, optimize=True)

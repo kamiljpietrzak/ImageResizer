@@ -73,6 +73,7 @@ Aplikacja wykorzystuje szereg technik, aby zminimalizować utratę jakości podc
 3. **Optymalizacja dla różnych formatów**:
    - Dla JPEG: Wyłączenie podpróbkowania chrominancji (subsampling=0), co eliminuje artefakty kompresji
    - Dla PNG: Użycie najlepszej kompresji bezstratnej (compress_level=9)
+   - Dla WebP: Optymalizacja jakości i metody kompresji (method=6)
 4. **Zachowanie oryginalnego formatu** - Aplikacja wykrywa i zachowuje oryginalny format obrazu
 
 ## Obsługiwane formaty obrazów
@@ -83,6 +84,7 @@ Aplikacja obsługuje następujące formaty obrazów:
 - BMP
 - GIF
 - TIFF
+- WebP
 
 ## Przykłady
 

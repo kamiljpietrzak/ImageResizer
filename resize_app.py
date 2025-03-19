@@ -123,7 +123,7 @@ class ImageResizerApp:
         info_text.insert(tk.END, "4. Kliknij 'Rozpocznij przetwarzanie'\n\n")
         info_text.insert(tk.END, "Obrazy są skalowane z zachowaniem proporcji, a następnie przycinane do docelowego rozmiaru.\n")
         info_text.insert(tk.END, "Wyższe wartości jakości i wyostrzania zapewniają lepsze rezultaty, ale zwiększają rozmiar plików.\n\n")
-        info_text.insert(tk.END, "Obsługiwane formaty obrazów: JPG/JPEG, PNG, BMP, GIF, TIFF")
+        info_text.insert(tk.END, "Obsługiwane formaty obrazów: JPG/JPEG, PNG, BMP, GIF, TIFF, WebP")
         info_text.config(state=tk.DISABLED)
     
     def center_window(self):
@@ -199,7 +199,7 @@ class ImageResizerApp:
             os.makedirs(output_folder)
         
         # Obsługiwane formaty obrazów
-        supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff')
+        supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp')
         
         # Znajdź wszystkie obrazy w folderze wejściowym
         image_files = []
@@ -282,6 +282,9 @@ class ImageResizerApp:
                     elif original_format == 'PNG' or filename.lower().endswith('.png'):
                         # Dla PNG użyj najlepszej kompresji bezstratnej
                         img_final.save(output_path, format='PNG', optimize=True, compress_level=9)
+                    elif original_format == 'WEBP' or filename.lower().endswith('.webp'):
+                        # Dla WebP ustaw jakość i metodę kompresji
+                        img_final.save(output_path, format='WEBP', quality=quality, method=6)
                     else:
                         # Dla innych formatów użyj domyślnych ustawień
                         img_final.save(output_path, quality=quality, optimize=True)
