@@ -99,3 +99,57 @@ python resize_images.py moje_obrazy przetworzone
 ```
 python resize_images.py . nowy_rozmiar
 ```
+
+## Instalacja i uruchomienie
+
+### Instalacja z pliku wykonywalnego (dla użytkowników Windows)
+
+1. Pobierz najnowszą wersję aplikacji z sekcji [Releases](https://github.com/kamiljpietrzak/ImageResizer/releases)
+2. Rozpakuj plik ZIP do wybranego folderu
+3. Uruchom plik `ImageResizer.exe` lub `Uruchom_ImageResizer.bat`
+
+### Instalacja z kodu źródłowego
+
+1. Sklonuj repozytorium:
+   ```
+   git clone https://github.com/kamiljpietrzak/ImageResizer.git
+   ```
+
+2. Przejdź do katalogu projektu:
+   ```
+   cd ImageResizer
+   ```
+
+3. Zainstaluj wymagane zależności:
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. Uruchom aplikację:
+   ```
+   python resize_app.py
+   ```
+
+## Tworzenie pliku wykonywalnego
+
+Aby utworzyć własny plik wykonywalny (EXE) dla systemu Windows:
+
+1. Zainstaluj PyInstaller:
+   ```
+   pip install pyinstaller
+   ```
+
+2. Utwórz plik wykonywalny:
+   ```
+   pyinstaller --onefile --windowed --name="ImageResizer" resize_app.py
+   ```
+
+3. Plik wykonywalny zostanie utworzony w folderze `dist`
+
+## Licencja
+
+Ten projekt jest licencjonowany na warunkach licencji MIT - zobacz plik [LICENSE](LICENSE) dla szczegółów.
+
+## Autor
+
+Kamil Pietrzak
